@@ -5,6 +5,8 @@ import com.amazonaws.services.lambda.runtime.{Context, RequestHandler}
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder
 import com.amazonaws.services.secretsmanager.model._
 
+import SeqrDepdencyLambdaService.wuxi
+
 class ScalaLambda extends RequestHandler[String, String] {
   override def handleRequest(event: String, context: Context): String = {
 
