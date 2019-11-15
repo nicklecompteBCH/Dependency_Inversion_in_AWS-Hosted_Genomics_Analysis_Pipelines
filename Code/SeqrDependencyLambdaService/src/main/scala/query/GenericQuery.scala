@@ -1,6 +1,6 @@
-package SeqrDependencyService.query
+package SeqrDependencyLambdaService.query
 
-import SeqrDependencyService.genomics._
+import SeqrDependencyLambdaService.genomics._
 
 trait GenericQuery{
     def QuerySteps : Seq[QueryBase] // probably not going to stay like this

@@ -1,2 +1,11 @@
 SeqrDependencyLambdaService-master/.idea/*
 ../../.DS_Store
+Code⁩/⁨⁨bin⁩/⁨gordb⁩/bin
+Code⁩/⁨⁨bin⁩/⁨gordb⁩/config
+Code⁩/⁨⁨bin⁩/⁨gordb⁩/doc
+Code⁩/⁨⁨bin⁩/⁨gordb⁩/lib
+deploy/*
+deploy.zip
+../../target/
+target/
+Code/SeqrDependencyLambdaService/src/main/bin/gordb/

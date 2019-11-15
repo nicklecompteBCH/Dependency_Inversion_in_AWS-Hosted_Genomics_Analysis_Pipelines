@@ -1,6 +1,6 @@
-package SeqrDependencyService.query
+package SeqrDependencyLambdaService.query
 
-import SeqrDependencyService.genomics._
+import SeqrDependencyLambdaService.genomics._
 
 sealed trait OrderingType
 case object LessThan extends OrderingType

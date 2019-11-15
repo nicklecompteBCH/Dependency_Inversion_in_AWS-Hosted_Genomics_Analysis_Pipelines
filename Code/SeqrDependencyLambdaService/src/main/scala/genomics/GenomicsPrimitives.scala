@@ -1,4 +1,4 @@
-package SeqrDependencyService.genomics
+package SeqrDependencyLambdaService.genomics
 
 // Simple sum type for DNA base pairs
 sealed trait DNABasePair

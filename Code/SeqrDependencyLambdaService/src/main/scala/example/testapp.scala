@@ -1,11 +1,12 @@
 package example
 
+import scala.sys.process._
 
 import com.amazonaws.services.lambda.runtime.{Context, RequestHandler}
 import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder
 import com.amazonaws.services.secretsmanager.model._
 
-import SeqrDepdencyLambdaService.wuxi
+import SeqrDependencyLambdaService.wuxi
 
 class ScalaLambda extends RequestHandler[String, String] {
   override def handleRequest(event: String, context: Context): String = {
@@ -17,41 +18,10 @@ class ScalaLambda extends RequestHandler[String, String] {
     val args = event.split(",")
 
     if (args(3).equalsIgnoreCase("WUXI")) {
-      val secretName: String = "TestSecret"
-      val region: String = "us-east-2"
-      var secret: String = null
 
-      val client = AWSSecretsManagerClientBuilder.standard().withRegion(region).build()
+        val loginCommand = ".bin/gordb/bin/gordb" //s"./bin/gordb/bin/gordb login --allowpass --project=$(ctx.project) --user=$(ctx.username)/$(ctx.password) --site=connect.bchresearch.org"
+        loginCommand.!!
 
-      val getSecretValueRequest: GetSecretValueRequest = new GetSecretValueRequest().withSecretId(secretName)
-
-      var getSecretValueResult: GetSecretValueResult = null
-
-      try {
-        getSecretValueResult = client.getSecretValue(getSecretValueRequest)
-
-      } catch {
-        case e: InternalServiceErrorException =>
-          throw e
-        case e: DecryptionFailureException =>
-          throw e
-        case e: InvalidParameterException =>
-          throw e
-        case e: InvalidRequestException =>
-          throw e
-        case e: ResourceNotFoundException =>
-          throw e
-      }
-
-      if (getSecretValueResult.getSecretString() != null) {
-        secret = getSecretValueResult.getSecretString()
-      }
-      else {
-        secret = "Not working"
-      }
-
-      // query format: gor -p chr1:111371-563625
-      return "gor -p chr" + args(0) + ":" + args(1) + "-" + args(2) + " #dbsnp#"
 
     } else if (args(3).equalsIgnoreCase("HAIL")) {
       /*GET test1/_search
@@ -76,8 +46,8 @@ class ScalaLambda extends RequestHandler[String, String] {
       val url = "https://search-test2-hnkwuh5gdzna4fwynnbelmggkq.us-east-2.es.amazonaws.com/_search?q=locus.contig:" +
         args(0) + "%20AND%20locus.position:[" + args(1) + "+TO+" + args(2) + "]&pretty"
       val content = scala.io.Source.fromURL(url).mkString
-      return content
+      content
     }
-    return "Error Service"
+    "Error Service"
   }
 }
